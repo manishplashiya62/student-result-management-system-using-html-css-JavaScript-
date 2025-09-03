@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Student Result Management</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="loginPage">
+    <h2>Admin Login</h2>
+    <input type="text" id="loginUser" placeholder="Username" />
+    <input type="password" id="loginPass" placeholder="Password" />
+    <button id="loginBtn">Login</button>
+    <p id="loginError" class="error"></p>
+  </div>
+
+  <div id="mainApp" class="hidden">
+    <h1>📚 Student Result Manager</h1>
+    <form id="resultForm">
+      <input type="hidden" id="editId" />
+      <input type="text" id="studentName" placeholder="Name" required />
+      <input type="number" id="math" placeholder="Math" min="0" max="100" required />
+      <input type="number" id="science" placeholder="Science" min="0" max="100" required />
+      <input type="number" id="english" placeholder="English" min="0" max="100" required />
+      <button type="submit" id="addBtn">Add Result</button>
+      <button type="button" id="cancelEdit" class="hidden">Cancel Edit</button>
+    </form>
+
+    <div class="actions">
+      <button id="printBtn">Print/Export</button>
+      <canvas id="performanceChart" width="400" height="200"></canvas>
+    </div>
+
+    <table id="resultTable">
+      <thead><tr>
+        <th>Name</th><th>Math</th><th>Science</th><th>English</th>
+        <th>Total</th><th>Average</th><th>Status</th><th>Action</th>
+      </tr></thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <script src="Chart.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
