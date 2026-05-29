@@ -1,12 +1,477 @@
-body { font-family: Arial, sans-serif; background: #f0f2f5; margin:0; padding:20px; }
-.hidden { display: none; }
-#error, .error { color: red; }
-.container, #loginPage, #mainApp { max-width: 800px; margin:auto; background:white; padding:20px; border-radius:8px; }
-form { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
-input { flex:1 1 150px; padding:8px; border:1px solid #ccc; border-radius:4px; }
-button { padding:8px 16px; background:#007bff; color:white; border:none; border-radius:4px; cursor:pointer; }
-button:hover { background:#0056b3; }
-table { width:100%; border-collapse:collapse; }
-th,td { padding:12px; text-align:center; border:1px solid #ddd; }
-.status-pass { color: green; } .status-fail { color: red; }
-.actions { display:flex; justify-content: space-between; align-items:center; margin-bottom:20px; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* -- Login Page -- */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  z-index: 1000;
+}
+
+.login-box {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 28px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.login-box input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.login-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.login-box button:active {
+  transform: translateY(0);
+}
+
+.error {
+  color: #e74c3c;
+  text-align: center;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.hint {
+  text-align: center;
+  color: #666;
+  font-size: 12px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+/* -- Main Application -- */
+#mainApp {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 28px;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.logout-btn:hover {
+  background: white;
+  color: #667eea;
+}
+
+/* -- Form Container -- */
+.form-container {
+  padding: 30px;
+  background: #f8f9fa;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.form-container h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.form-group input {
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#addBtn,
+.cancel-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#addBtn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  flex: 1;
+  min-width: 150px;
+}
+
+#addBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.cancel-btn {
+  background: #e74c3c;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: #c0392b;
+}
+
+/* -- Actions Container -- */
+.actions-container {
+  padding: 30px;
+  background: #f8f9fa;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.search-export {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 15px;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+#searchBox {
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+#searchBox:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.export-btn,
+.clear-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.export-btn {
+  background: #27ae60;
+  color: white;
+}
+
+.export-btn:hover {
+  background: #229954;
+}
+
+.clear-btn {
+  background: #e67e22;
+  color: white;
+}
+
+.clear-btn:hover {
+  background: #d35400;
+}
+
+.chart-container {
+  position: relative;
+  height: 200px;
+  margin-top: 20px;
+}
+
+canvas {
+  max-width: 100%;
+}
+
+/* -- Table Container -- */
+.table-container {
+  padding: 30px;
+  overflow-x: auto;
+}
+
+.table-container h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+th {
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s;
+}
+
+th:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+tbody tr:hover {
+  background: #f8f9fa;
+}
+
+tbody tr:nth-child(even) {
+  background: #fafbfc;
+}
+
+.no-data {
+  text-align: center;
+  color: #999;
+  padding: 40px 15px !important;
+  font-style: italic;
+}
+
+/* -- Status Badges -- */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 12px;
+  display: inline-block;
+  min-width: 60px;
+}
+
+.status-pass {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-fail {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* -- Action Buttons in Table -- */
+.edit-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: transform 0.2s;
+  margin: 0 5px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  transform: scale(1.2);
+}
+
+/* -- Responsive Design -- */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+  }
+
+  .form-group {
+    grid-template-columns: 1fr;
+  }
+
+  .search-export {
+    grid-template-columns: 1fr;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th,
+  td {
+    padding: 8px 5px;
+  }
+
+  .chart-container {
+    height: 150px;
+  }
+
+  .login-box {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 18px;
+  }
+
+  .header {
+    padding: 20px;
+  }
+
+  .form-container,
+  .actions-container,
+  .table-container {
+    padding: 20px;
+  }
+
+  th,
+  td {
+    padding: 6px 3px;
+    font-size: 11px;
+  }
+
+  .chart-container {
+    height: 120px;
+  }
+
+  .status-badge {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}
+
+/* -- Print Styles -- */
+@media print {
+  body {
+    background: white;
+  }
+
+  .header,
+  .form-container,
+  .actions-container {
+    display: none;
+  }
+
+  .table-container {
+    padding: 0;
+  }
+
+  table {
+    border: 1px solid #000;
+  }
+
+  th,
+  td {
+    border: 1px solid #000;
+  }
+
+  th {
+    background: #f0f0f0 !important;
+    color: #000 !important;
+  }
+}
